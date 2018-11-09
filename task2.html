@@ -1,0 +1,66 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	.forma {
+		padding:5px;
+		display:block;
+	}
+</style>
+</head>
+<body>
+	<form action="" class="forma">
+		<label for="input" class="forma" >Enter expression</label>
+		<input type="text"   name="expression"  class="forma">
+		<label for="result"  class="forma">Result</label>
+		<textarea name="result"  cols="22" rows="1" disabled  class="forma"></textarea><br>
+		<input type="button" value="Get result" class="button" name="go">
+	</form>
+<script>
+let go = document.getElementsByName("go")[0];
+let result = document.getElementsByName("result")[0];
+go.addEventListener('click',gogo);
+
+function gogo (){
+	let expression = document.getElementsByName("expression")[0].value.trim();
+	if (expression[expression.length-1]!='=') {
+		alert("Expression must end with '=' !");
+		return;
+	}
+	expression = expression.replace('=','');
+	//console.dir(expression);
+	let parsedExpr = expression.split(/[\*/\+-]/);
+	//console.dir(parsedExpr);
+	let arrOperators = expression.split(/[^\*/\+-]/);
+	arrOperators = arrOperators.join(' ').replace(/\s/g,'').split('');
+	calculatedValue = calculate(parsedExpr,arrOperators);
+	// console.dir(calculatedValue);
+	result.value = calculatedValue.toFixed(2);
+}
+
+function calculate (parsedExpr,arrOperators){
+	let calculatedValue = parsedExpr.reduce((value,currentChar,i)=>{
+
+	//console.dir(currentChar);
+	//console.dir(typeof currentChar);
+	if (i<parsedExpr.length-1) {
+		switch (arrOperators[i]){
+			case '+': value+=+parsedExpr[i+1];
+			break;
+			case '-': value-=+parsedExpr[i+1];
+			break;
+			case '/': value/=parsedExpr[i+1];
+			break;
+			case '*':value*= parsedExpr[i+1];
+			break;
+		}
+	}
+	return value;
+	},+parsedExpr[0]);	
+	return calculatedValue;
+}
+</script>
+</body>
+</html>

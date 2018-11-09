@@ -70,69 +70,57 @@ tr td:hover {
 		}
 	}
 
- 
-function buttonListener(e){
-	if (e.target.name == "toRight") {
-		let elemsLeft = textarea1.childNodes[1].tBodies;
- 
-		let elemsRight = textarea2.childNodes[1];	
- 
-		for (i=0;i<elemsLeft.length;i++){
-			if (elemsLeft[i].childNodes[0].childNodes[0].className=="yellow") {
-				elemsLeft[i].childNodes[0].childNodes[0].classList.toggle("yellow");
-				elemsRight.appendChild(elemsLeft[i]); 
+
+	function buttonListener(e){
+		if (e.target.name == "toRight") {
+			let elemsLeft = textarea1.childNodes[1].tBodies;
+			let elemsRight = textarea2.childNodes[1];
+			checkSelect(elemsLeft);	
+			replace(elemsLeft,elemsRight);
+		};
+		if (e.target.name == "toLeft") {
+			let elemsRight = textarea2.childNodes[1].tBodies;
+			let elemsLeft = textarea1.childNodes[1];	
+			checkSelect(elemsRight);
+			replace(elemsRight,elemsLeft);
+		};
+		if (e.target.name == "allToRight") {
+			let elemsLeft = textarea1.childNodes[1].tBodies;
+			let elemsRight = textarea2.childNodes[1];	
+			replaceAll(elemsLeft,elemsRight);
+		};
+		if (e.target.name == "allToLeft") {
+			let elemsRight = textarea2.childNodes[1].tBodies;
+			let elemsLeft = textarea1.childNodes[1];	
+			replaceAll(elemsRight,elemsLeft);			
+		};
+	};
+
+	function replace(from, to) {
+		for (i=0;i<from.length;i++){
+			if (from[i].childNodes[0].childNodes[0].className=="yellow") {
+				from[i].childNodes[0].childNodes[0].classList.toggle("yellow");
+				to.appendChild(from[i]); 
 				i--;
 			}
-		}
-
-	};
-	if (e.target.name == "toLeft") {
-		let elemsRight = textarea2.childNodes[1].tBodies;
- 
-		let elemsLeft = textarea1.childNodes[1];	
- 
-		for (i=0;i<elemsRight.length;i++){
-			if (elemsRight[i].childNodes[0].childNodes[0].className=="yellow") {
-				elemsRight[i].childNodes[0].childNodes[0].classList.toggle("yellow");
-				elemsLeft.appendChild(elemsRight[i]); 
-				i--;
+		}	
+	}
+	function replaceAll(from, to) {
+		for (i=0;i<from.length;i++){
+			from[i].childNodes[0].childNodes[0].classList.remove("yellow");
+			to.appendChild(from[i]); 
+			i--;
+		}	
+	}
+	function checkSelect(where){
+		for (i=0;i<where.length;i++){
+			if (where[i].childNodes[0].childNodes[0].className=="yellow") {
+				return;
 			}
 		}
-
-	};
-	if (e.target.name == "allToRight") {
-		let elemsLeft = textarea1.childNodes[1].tBodies;
- 
-		let elemsRight = textarea2.childNodes[1];	
- 
-		for (i=0;i<elemsLeft.length;i++){
- 
-				elemsLeft[i].childNodes[0].childNodes[0].classList.remove("yellow");
-				elemsRight.appendChild(elemsLeft[i]); 
-				i--;
- 
-		}
-
-	};
-	if (e.target.name == "allToLeft") {
-		let elemsRight = textarea2.childNodes[1].tBodies;
- 
-		let elemsLeft = textarea1.childNodes[1];	
- 
-		for (i=0;i<elemsRight.length;i++){
- 
-				elemsRight[i].childNodes[0].childNodes[0].classList.remove("yellow");
-				elemsLeft.appendChild(elemsRight[i]); 
-				i--;
- 
-		}
-
-	};
-};
-
-
+		alert('select at least one option');
+	}
 </script>
 </body>
 </html>
 
- 
