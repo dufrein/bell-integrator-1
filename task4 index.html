@@ -1,0 +1,170 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	.explorer {
+		background-color:#222222;
+		width:100%;
+		border: 1px solid black;
+	}
+	.navMenu {
+		float:left;
+		margin-bottom:20px;
+	}
+	.navButton {
+		background-color: #dddddd;
+		padding:5px;
+		float:left;
+		list-style:none;
+		margin:5px;
+		border:solid 1px black;
+	}
+	a {
+		text-decoration: none;
+		color:black;
+	}
+	a:visited {
+		color:black;
+	}
+	.pages {
+		position:relative;
+		list-style: none;	
+		clear:both;
+		width: 90%;
+		height:90px;
+		background-color: #eeeeee;
+		margin: 40px auto; 
+		padding: 10px;
+		font-size: 50px;
+		text-align: center;
+	}
+	.page {
+		opacity: 0;
+		position:absolute;
+		left:0;
+		top:0;
+		width:100%;
+		height:100%;
+		padding:10px;
+	}
+	.timer {
+		width:100%;
+		text-align: center;
+		font-size:40px;
+		color: #dd1122;
+		clear:both;
+		position: absolute;
+		top:144px;
+	}
+	.active {
+		opacity: 1;
+		z-index: 2;
+
+	}
+</style>
+</head>
+<body>
+	<div class="explorer">
+
+		<nav class="navMenu">
+			<ul>
+				<li class='navButton'><a href="#" name="stop">Stop ||</a></li>
+				<li class='navButton'><a href="#" name="play">Play ></a></li>
+				<li class='navButton'><a href="#" name="prev">Prev <<</a></li>
+				<li class='navButton'><a href="#" name="next">Next >></a></li>
+			</ul>
+		</nav>
+
+		<ul class="pages">
+			<li class="page active">First page</li>
+			<li class="page">Second page</li>
+			<li class="page">Third page</li>
+		</ul>
+		<div class="timer" data-timer=""></div>
+	</div>
+	<script>
+		// window.open();
+		let pages = document.getElementsByClassName('pages')[0];
+		//console.dir(pages);
+		let initialTime = 3003;
+		let navMenu = document.getElementsByClassName('navMenu')[0];
+		navMenu.addEventListener('click',clickNav);
+		let intervalId;
+		let timer = document.getElementsByClassName('timer')[0];	
+		let pausedInterval;
+		function start(){
+			intervalId = setInterval(slider, 1000);				
+		}
+		start();
+		function slider(){
+			// console.dir(pages);
+			if (!(initialTime%4)) {
+				nextPage();
+			}
+			updateTimer();
+		}
+		function updateTimer (){
+			if (initialTime%4) {
+				timer.innerHTML = '( '+initialTime%4+' )';
+			}
+			else {
+				timer.innerHTML = '( '+initialTime%4+' )';
+				setTimeout(()=>{timer.innerHTML =""}, 100);
+			}
+			initialTime = initialTime -1; 
+		}
+		function clickNav (e){
+			if (e.target.name=="stop") {
+				clearInterval(intervalId);
+				pausedInerval = intervalId;
+				//console.dir(intervalId);	
+			}
+			else if (e.target.name =="play" && pausedInerval == intervalId) {
+				start();
+				//console.dir(intervalId);	
+			}
+			else if (e.target.name =="next"){
+				clearInterval(intervalId);
+				nextPage();
+				initialTime = 3003;
+				timer.innerHTML = "";
+				start();
+			}
+			else if (e.target.name =="prev"){
+				clearInterval(intervalId);
+				prevPage();
+				initialTime = 3003;
+				timer.innerHTML = "";
+				start();
+			}
+		}
+		function nextPage(){
+			let activePage = pages.getElementsByClassName('active')[0];
+			if (!!activePage.nextElementSibling) {
+				let nextPage = activePage.nextElementSibling;
+				nextPage.classList.toggle('active'); 
+			}
+			else {
+				let endOrNot = confirm('you have reached the last page! continue from the beginning or exit?');
+				if (!endOrNot) {window.close();}
+				let nextPage = pages.firstElementChild;
+				nextPage.classList.toggle('active');
+			}
+			activePage.classList.toggle('active');
+		}
+		function prevPage(){
+			let activePage = pages.getElementsByClassName('active')[0];
+			if (!!activePage.previousElementSibling) {
+				let prevPage = activePage.previousElementSibling;
+				prevPage.classList.toggle('active'); 
+			}
+			else {
+				let prevPage = pages.lastElementChild;
+				prevPage.classList.toggle('active');
+			}
+			activePage.classList.toggle('active');
+		}
+	</script>
+</body>
+</html>
