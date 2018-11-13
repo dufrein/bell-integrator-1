@@ -1,0 +1,30 @@
+.select {
+	float:left;
+	padding:5px;
+	margin:5px;
+	border:1px solid black;
+	width: 100px;
+	height: 150px;
+	overflow:scroll;
+}
+.form {
+	display: inline-block;
+	padding:5px;
+	margin:5px;
+}
+div >button {
+	width:35px;
+}
+#buttons {
+	float:left;
+	margin:5px;
+}
+#t2:after {
+	clear:both;
+}
+tr td:hover {
+	background-color: #aaaaff;
+}
+.yellow {
+	background-color:yellow;
+}

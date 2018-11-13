@@ -1,0 +1,58 @@
+.explorer {
+	background-color:#222222;
+	width:100%;
+	border: 1px solid black;
+}
+#navMenu {
+	float:left;
+	margin-bottom:20px;
+}
+.navButton {
+	background-color: #dddddd;
+	padding:5px;
+	float:left;
+	list-style:none;
+	margin:5px;
+	border:solid 1px black;
+}
+a {
+	text-decoration: none;
+	color:black;
+}
+a:visited {
+	color:black;
+}
+.pages {
+	position:relative;
+	list-style: none;	
+	clear:both;
+	width: 90%;
+	height:90px;
+	background-color: #eeeeee;
+	margin: 40px auto; 
+	padding: 10px;
+	font-size: 50px;
+	text-align: center;
+}
+.page {
+	opacity: 0;
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	padding:10px;
+}
+#timer {
+	width:100%;
+	text-align: center;
+	font-size:40px;
+	color: #dd1122;
+	clear:both;
+	position: absolute;
+	top:144px;
+}
+.active {
+	opacity: 1;
+	z-index: 2;
+}
