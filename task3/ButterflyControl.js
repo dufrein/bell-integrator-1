@@ -1,6 +1,6 @@
 let arr1 =['Option1','Option2','Option3','Option4','Option5','Option6','Option7'];
-	let select1 = document.getElementsByClassName('select')[0];
-	let select2 = document.getElementsByClassName('select')[1];
+	let select1 = document.getElementById('select1')
+	let select2 = document.getElementById('select2')
 	let buttons = document.getElementById('buttons');
 	buttons.addEventListener('click',buttonListener);
 
@@ -37,6 +37,7 @@ let arr1 =['Option1','Option2','Option3','Option4','Option5','Option6','Option7'
 		for (i=0;i<from.length;i++){
 			if (from[i].className=="yellow") {
 				from[i].classList.toggle("yellow");
+				from[i].selected = false;
 				to.appendChild(from[i]); 
 				i--;
 			}
@@ -45,6 +46,7 @@ let arr1 =['Option1','Option2','Option3','Option4','Option5','Option6','Option7'
 	function replaceAll(from, to) {
 		for (i=0;i<from.length;i++){
 			from[i].classList.remove("yellow");
+			from[i].selected = false;
 			to.appendChild(from[i]); 
 			i--;
 		}	

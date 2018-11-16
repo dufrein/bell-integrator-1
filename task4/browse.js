@@ -1,4 +1,4 @@
-let pages = document.getElementsByClassName('pages')[0];
+let iWindow = document.getElementById('iframe');
 let initialTime = 3003;
 let navMenu = document.getElementById('navMenu');
 navMenu.addEventListener('click',clickNav);
@@ -9,6 +9,8 @@ function start(){
 	intervalId = setInterval(slider, 1000);				
 }
 start();
+let numberOfPage = 1; 
+
 function slider(){
 	if (!(initialTime%4)) {
 		nextPage();
@@ -49,28 +51,29 @@ function clickNav (e){
 	}
 }
 function nextPage(){
-	let activePage = pages.getElementsByClassName('active')[0];
-	if (!!activePage.nextElementSibling) {
-		let nextPage = activePage.nextElementSibling;
-		nextPage.classList.toggle('active'); 
-	}
-	else {
+	if (numberOfPage <4){
+		numberOfPage+=1;
+ 		iWindow.src = 'page'+numberOfPage+'.html';
+ 	}
+ 	else {
 		let endOrNot = confirm('you have reached the last page! continue from the beginning or exit?');
-		if (!endOrNot) {window.close();}
-			let nextPage = pages.firstElementChild;
-			nextPage.classList.toggle('active');
+		if (endOrNot) {
+			numberOfPage=1;
+			iWindow.src = 'page1.html';
 		}
-	activePage.classList.toggle('active');
+		else {
+			window.close();
+		}
+ 	}
+ 
 }
 function prevPage(){
-	let activePage = pages.getElementsByClassName('active')[0];
-	if (!!activePage.previousElementSibling) {
-		let prevPage = activePage.previousElementSibling;
-		prevPage.classList.toggle('active'); 
-	}
-	else {
-		let prevPage = pages.lastElementChild;
-		prevPage.classList.toggle('active');
-	}
-	activePage.classList.toggle('active');
+	if (numberOfPage > 1){
+		numberOfPage-=1;
+ 		iWindow.src = 'page'+numberOfPage+'.html';
+ 	} 	
+ 	else {
+ 		numberOfPage = 4;
+ 		iWindow.src = 'page4.html';
+ 	}
 }
