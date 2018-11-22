@@ -1,4 +1,4 @@
-.explorer {
+#explorer {
 	background-color:#222222;
 	width:100%;
 	border: 1px solid black;
@@ -22,7 +22,7 @@ a {
 a:visited {
 	color:black;
 }
-.pages {
+#pages {
 	position:relative;
 	list-style: none;	
 	clear:both;

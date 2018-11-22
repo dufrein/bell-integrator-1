@@ -1,4 +1,17 @@
-let iWindow = document.getElementById('iframe');
+let pages = document.getElementById('pages');
+let nav = document.createElement('nav');
+let explorer = document.getElementById('explorer');
+explorer.insertBefore(nav,pages);
+
+nav.outerHTML =`<nav id="navMenu">
+<ul>
+<li class="navButton"><a href="#" name="stop">Stop ||</a></li>
+<li class="navButton"><a href="#" name="play">Play ></a></li>
+<li class="navButton"><a href="#" name="prev">Prev <<</a></li>
+<li class="navButton"><a href="#" name="next">Next >></a></li>
+</ul>
+</nav>`;
+
 let initialTime = 3003;
 let navMenu = document.getElementById('navMenu');
 navMenu.addEventListener('click',clickNav);
@@ -9,7 +22,6 @@ function start(){
 	intervalId = setInterval(slider, 1000);				
 }
 start();
-let numberOfPage = 1; 
 
 function slider(){
 	if (!(initialTime%4)) {
@@ -24,7 +36,7 @@ function updateTimer (){
 	else {
 		timer.innerHTML = '( '+initialTime%4+' )';
 		setTimeout(()=>{timer.innerHTML =""}, 100);
-}
+	}
 	initialTime = initialTime -1; 
 }
 function clickNav (e){
@@ -51,29 +63,27 @@ function clickNav (e){
 	}
 }
 function nextPage(){
-	if (numberOfPage <4){
-		numberOfPage+=1;
- 		iWindow.src = 'page'+numberOfPage+'.html';
- 	}
- 	else {
+	if (pageNum <4){
+		pageNum++;
+		document.location.assign('page'+pageNum+'.html');
+	}
+	else {
 		let endOrNot = confirm('you have reached the last page! continue from the beginning or exit?');
 		if (endOrNot) {
-			numberOfPage=1;
-			iWindow.src = 'page1.html';
+			document.location.assign('page1.html');
 		}
 		else {
 			window.close();
 		}
- 	}
- 
+	}
 }
+
 function prevPage(){
-	if (numberOfPage > 1){
-		numberOfPage-=1;
- 		iWindow.src = 'page'+numberOfPage+'.html';
+	if (pageNum > 1){
+		pageNum--;
+		document.location.assign('page'+pageNum+'.html');
  	} 	
  	else {
- 		numberOfPage = 4;
- 		iWindow.src = 'page4.html';
+ 		document.location.assign('page4.html');
  	}
 }
