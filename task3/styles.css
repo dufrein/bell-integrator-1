@@ -25,6 +25,6 @@ div >button {
 tr td:hover {
 	background-color: #aaaaff;
 }
-.yellow {
+.selected {
 	background-color:yellow;
 }

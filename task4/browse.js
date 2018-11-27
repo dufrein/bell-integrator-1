@@ -12,7 +12,8 @@ nav.outerHTML =`<nav id="navMenu">
 </ul>
 </nav>`;
 
-let initialTime = 3003;
+let initialTimeValue = 4;
+let initialTime = initialTimeValue;
 let navMenu = document.getElementById('navMenu');
 navMenu.addEventListener('click',clickNav);
 let intervalId;
@@ -24,44 +25,47 @@ function start(){
 start();
 
 function slider(){
-	if (!(initialTime%4)) {
+	if (initialTime===0) {
 		nextPage();
 	}
 	updateTimer();
 }
 function updateTimer (){
-	if (initialTime%4) {
-		timer.innerHTML = '( '+initialTime%4+' )';
+	if (initialTime!=0) {
+		timer.innerHTML = '( '+initialTime+' )';
 	}
 	else {
-		timer.innerHTML = '( '+initialTime%4+' )';
+		timer.innerHTML = '( '+initialTime+' )';
 		setTimeout(()=>{timer.innerHTML =""}, 100);
 	}
 	initialTime = initialTime -1; 
 }
 function clickNav (e){
-	if (e.target.name=="stop") {
+	if (e.target.name ==="play" && pausedInerval === intervalId) {
+		start();
+	}
+	switch (e.target.name) {
+		case "stop":
 		clearInterval(intervalId);
 		pausedInerval = intervalId;
-	}
-	else if (e.target.name =="play" && pausedInerval == intervalId) {
-		start();
-	}
-	else if (e.target.name =="next"){
+		break;
+		case "next":
 		clearInterval(intervalId);
 		nextPage();
-		initialTime = 3003;
+		initialTime = initialTimeValue;
 		timer.innerHTML = "";
 		start();
-	}
-	else if (e.target.name =="prev"){
+		break;
+		case "prev":
 		clearInterval(intervalId);
 		prevPage();
-		initialTime = 3003;
+		initialTime = initialTimeValue;
 		timer.innerHTML = "";
 		start();
+		break;
 	}
 }
+
 function nextPage(){
 	if (pageNum <4){
 		pageNum++;
@@ -82,8 +86,8 @@ function prevPage(){
 	if (pageNum > 1){
 		pageNum--;
 		document.location.assign('page'+pageNum+'.html');
- 	} 	
- 	else {
- 		document.location.assign('page4.html');
- 	}
+	} 	
+	else {
+		document.location.assign('page4.html');
+	}
 }

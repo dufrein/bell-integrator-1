@@ -13,7 +13,7 @@ let arr1 =['Option1','Option2','Option3','Option4','Option5','Option6','Option7'
 
 	function delegate(e){
 		if (e.target.tagName == "OPTION") {
-			e.target.classList.toggle("yellow");
+			e.target.classList.toggle("selected");
 		}
 	}
 
@@ -35,8 +35,8 @@ let arr1 =['Option1','Option2','Option3','Option4','Option5','Option6','Option7'
 	function replace(from, to) {
 		checkSelect(from);	
 		for (i=0;i<from.length;i++){
-			if (from[i].className=="yellow") {
-				from[i].classList.toggle("yellow");
+			if (from[i].className=="selected") {
+				from[i].classList.toggle("selected");
 				from[i].selected = false;
 				to.appendChild(from[i]); 
 				i--;
@@ -45,7 +45,7 @@ let arr1 =['Option1','Option2','Option3','Option4','Option5','Option6','Option7'
 	}
 	function replaceAll(from, to) {
 		for (i=0;i<from.length;i++){
-			from[i].classList.remove("yellow");
+			from[i].classList.remove("selected");
 			from[i].selected = false;
 			to.appendChild(from[i]); 
 			i--;
@@ -53,7 +53,7 @@ let arr1 =['Option1','Option2','Option3','Option4','Option5','Option6','Option7'
 	}
 	function checkSelect(where){
 		for (i=0;i<where.length;i++){
-			if (where[i].className=="yellow") {
+			if (where[i].className=="selected") {
 				return;
 			}
 		}
