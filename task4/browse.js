@@ -41,9 +41,7 @@ function updateTimer (){
 	initialTime = initialTime -1; 
 }
 function clickNav (e){
-	if (e.target.name ==="play" && pausedInerval === intervalId) {
-		start();
-	}
+ 
 	switch (e.target.name) {
 		case "stop":
 		clearInterval(intervalId);
@@ -62,6 +60,9 @@ function clickNav (e){
 		initialTime = initialTimeValue;
 		timer.innerHTML = "";
 		start();
+		break;
+		case "play":
+		if (pausedInerval === intervalId) {start();}
 		break;
 	}
 }
